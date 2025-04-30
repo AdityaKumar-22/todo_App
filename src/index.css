@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer components {
+    .sidebarButtons {
+      @apply flex gap-3 items-center font-normal text-xl w-fit lg:w-48 md:p-3 rounded-3xl cursor-pointer hover:bg-zinc-900;
+    }
+    
+}
+
+*{
+  margin: 0; padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  -webkit-tap-highlight-color: transparent;
+}
+/* Custom Scrollbar for a dark theme */
+::-webkit-scrollbar {
+  width: 8px;               /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #dbd9d9;      /* Darker track background */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #e4e0e0; /* Gray thumb color */
+  border-radius: 4px;
+  border: 2px solid #ece6e6; /* Blending thumb with the track */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #888;    /* Lighter gray when hovered */
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: #aaa;    /* Lighter color when active */
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #cfcccc #c2b0b0;
+}
+body{
+    background-color: #f3f4f6;
+    font-family: 'Poppins', sans-serif;
+    /* color: #333; */
+}
+
+
+input[type="checkbox"] {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  /* Remove most all native input styles */
+  appearance: none;
+  /* For iOS < 15 */
+  background-color: var(--form-background);
+  /* Not removed via appearance */
+  margin: 0;
+
+  font: inherit;
+  color: currentColor;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid currentColor;
+  border-radius: 0.15em;
+  transform: translateY(-0.075em);
+
+  display: inline-grid;
+  place-content: center;
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  transform: scale(0);
+  transform-origin: bottom left;
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+  /* Windows High Contrast Mode */
+  background-color: CanvasText;
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+input[type="checkbox"]:focus {
+  outline: max(2px, 0.15em) solid currentColor;
+  outline-offset: max(2px, 0.15em);
+}
