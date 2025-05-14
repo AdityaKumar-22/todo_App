@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 // import './App.css'
 import Navbar from "./components/Navbar";
+import Task from "./components/Task";
 import { v4 as uuidv4 } from "uuid";
 // uuidv4(); // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
-import { AiTwotoneEdit } from "react-icons/ai";
-import { TiDeleteOutline } from "react-icons/ti";
 
 function App() {
   //1. Create state variables todo , taskList and showFinish and load tasks from local storage using useEffect
@@ -25,70 +24,6 @@ function App() {
         return !task.isCompleted;
       });
 
-  const Task = ({ task }) => {
-    //editValue is used to store the value of the task being edited
-    const [editValue, setEditValue] = useState(task.todo);
-
-    return (
-      <div className="task flex justify-between px-2 py-1 transition ease-in-out delay-250">
-        <div className="task-name transition ease-in-out delay-250">
-          {task.isEditing ? (
-            <input
-              type="text"
-              value={editValue}
-              onChange={(e) => setEditValue(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") handleSave(task.id, editValue);
-              }}
-              className="border rounded p-1"
-            />
-          ) : (
-            <>
-              <input
-                type="checkbox"
-                checked={task.isCompleted}
-                name={task.id}
-                id={task.id}
-                onChange={handleCheckbox}
-                className="w-5 h-5 text-violet-500 border-2 border-gray-300 rounded focus:ring-violet-500 focus:ring-offset-2"
-              />
-              <label
-                htmlFor={task.id}
-                className={`${task.isCompleted ? "line-through" : ""}`}
-              >
-                {task.todo}
-              </label>
-            </>
-          )}
-        </div>
-        <div className="task-action flex gap-2">
-          {task.isEditing ? (
-            <button
-              onClick={() => handleSave(task.id, editValue)}
-              className="bg-violet-800 hover:bg-violet-950 text-white p-2 rounded-md"
-            >
-              Save
-            </button>
-          ) : (
-            <>
-              <button
-                onClick={() => handleEdit(task.id)}
-                className="bg-violet-500 text-white p-2 rounded-md"
-              >
-                <AiTwotoneEdit />
-              </button>
-              <button
-                onClick={() => handleDelete(task.id)}
-                className="bg-violet-500 text-white p-2 rounded-md"
-              >
-                <TiDeleteOutline />
-              </button>
-            </>
-          )}
-        </div>
-      </div>
-    );
-  };
   const saveTasks = (taskList) => {
     localStorage.setItem("tasks", JSON.stringify(taskList));
   };
@@ -188,7 +123,13 @@ function App() {
               <p className="m-2">No tasks available</p>
             )}
             {filteredTaskList.map((task) => {
-              return <Task task={task} key={task.id} />;
+              const handlers = {
+                handleCheckbox,
+                handleDelete,
+                handleEdit,
+                handleSave,
+              };
+              return <Task task={task} key={task.id} handlers={handlers} />;
             })}
           </div>
         </div>
