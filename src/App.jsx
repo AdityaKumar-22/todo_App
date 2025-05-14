@@ -78,6 +78,12 @@ function App() {
     setTaskList(newTaskList);
     // saveTasks(taskList);
   };
+  const handlers = {
+      handleCheckbox,
+      handleDelete,
+      handleEdit,
+      handleSave,
+  };
   return (
     <>
       <Navbar />
@@ -99,11 +105,9 @@ function App() {
                   if (e.key == "Enter") handleAdd();
                 }}
               />
-              <button
-                onClick={handleAdd}
-                className="bg-violet-800 hover:bg-violet-950 text-white text-base px-4 py-2 border rounded-xl"
-              >
-                Add
+              <button onClick={handleAdd}
+              className="bg-violet-800 hover:bg-violet-950 text-white text-base px-4 py-2 border rounded-xl">
+              Add
               </button>
             </div>
           </div>
@@ -123,12 +127,6 @@ function App() {
               <p className="m-2">No tasks available</p>
             )}
             {filteredTaskList.map((task) => {
-              const handlers = {
-                handleCheckbox,
-                handleDelete,
-                handleEdit,
-                handleSave,
-              };
               return <Task task={task} key={task.id} handlers={handlers} />;
             })}
           </div>

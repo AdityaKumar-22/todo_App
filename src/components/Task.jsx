@@ -68,6 +68,7 @@ const Task = ({ task, handlers }) => {
   );
 };
 
+//Prop Validation
 Task.propTypes = {
   task: PropTypes.shape({
     id: PropTypes.string.isRequired,
